@@ -1,0 +1,170 @@
+:root {
+  --bg: #0a0a0a;
+  --surface: #111111;
+  --surface-hover: #1a1a1a;
+  --border: #262626;
+  --border-strong: #3a3a3a;
+  --text: #f5f5f5;
+  --muted: #a3a3a3;
+  --dim: #6b6b6b;
+  --danger: #f87171;
+  --font: system-ui, -apple-system, "Segoe UI", "Noto Sans Thai", "Leelawadee UI", Tahoma, sans-serif;
+  --mono: ui-monospace, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding:
+    max(16px, env(safe-area-inset-top))
+    max(16px, env(safe-area-inset-right))
+    max(16px, env(safe-area-inset-bottom))
+    max(16px, env(safe-area-inset-left));
+  background-color: var(--bg);
+  background-image: radial-gradient(ellipse 80% 50% at 50% 0%, #1c1c1c 0%, transparent 70%);
+  background-repeat: no-repeat;
+  color: var(--text);
+  font-family: var(--font);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ---------- Language switch ---------- */
+.topbar { width: 100%; max-width: 960px; display: flex; justify-content: flex-end; }
+.lang-switch {
+  display: inline-flex; padding: 3px;
+  border: 1px solid var(--border); border-radius: 999px; background: var(--surface);
+}
+.lang-btn {
+  min-width: 44px; min-height: 32px; padding: 0 12px;
+  border: 0; border-radius: 999px; background: transparent; color: var(--dim);
+  font: 600 0.8125rem/1 var(--font); letter-spacing: 0.04em;
+  cursor: pointer; transition: color .2s, background-color .2s;
+}
+.lang-btn[aria-pressed="true"] { background: var(--text); color: var(--bg); }
+
+/* ---------- Header ---------- */
+.header { text-align: center; margin-top: clamp(24px, 6vh, 64px); max-width: 720px; }
+.title {
+  margin: 0;
+  font-size: clamp(2rem, 7vw, 3.75rem);
+  font-weight: 700; line-height: 1.1; letter-spacing: -0.03em;
+  background: linear-gradient(180deg, #ffffff 0%, #9a9a9a 100%);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.subtitle { margin: 12px 0 0; color: var(--muted); font-size: clamp(0.9375rem, 2.5vw, 1.0625rem); }
+
+/* ---------- Main panel ---------- */
+.main {
+  flex: 1; width: 100%; max-width: 440px;
+  display: flex; flex-direction: column; justify-content: center;
+  padding: clamp(24px, 5vh, 48px) 0;
+}
+.panel {
+  width: 100%; padding: clamp(24px, 6vw, 36px);
+  background: var(--surface); border: 1px solid var(--border); border-radius: 16px;
+  text-align: center; box-shadow: 0 20px 60px rgba(0, 0, 0, .5);
+}
+.label {
+  margin: 0; color: var(--dim);
+  font-size: .75rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase;
+}
+.code-box {
+  display: flex; align-items: center; justify-content: center;
+  height: clamp(88px, 24vw, 112px); margin: 14px 0 24px;
+  background: var(--bg); border: 1px solid var(--border); border-radius: 12px;
+}
+.code {
+  font-family: var(--mono); font-size: clamp(2.5rem, 13vw, 3.5rem); font-weight: 600;
+  letter-spacing: .3em; padding-left: .3em;
+  -webkit-user-select: all; user-select: all;
+}
+.code.is-empty { color: #3a3a3a; -webkit-user-select: none; user-select: none; }
+.code.reveal { animation: reveal .45s cubic-bezier(.2, .8, .2, 1); }
+
+/* ---------- Spinner ---------- */
+.spinner {
+  width: 36px; height: 36px;
+  border: 3px solid #2a2a2a; border-top-color: var(--text); border-radius: 50%;
+  animation: spin .8s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+@keyframes reveal {
+  from { opacity: 0; filter: blur(6px); transform: translateY(4px); }
+  to   { opacity: 1; filter: none; transform: none; }
+}
+
+/* ---------- Buttons ---------- */
+.actions { display: flex; flex-wrap: wrap; gap: 10px; }
+.btn {
+  flex: 1 1 140px; min-height: 48px; padding: 0 20px; border-radius: 10px;
+  font: 600 1rem/1 var(--font); cursor: pointer;
+  transition: background-color .2s, border-color .2s, opacity .2s, transform .1s;
+}
+.btn:active:not(:disabled) { transform: scale(.98); }
+.btn:disabled { opacity: .45; cursor: not-allowed; }
+.btn-primary { background: var(--text); color: var(--bg); border: 1px solid var(--text); }
+.btn-ghost { background: transparent; color: var(--text); border: 1px solid var(--border-strong); }
+:focus-visible { outline: 2px solid var(--text); outline-offset: 3px; }
+
+.msg { min-height: 1.6em; margin: 16px 0 0; color: var(--muted); font-size: .875rem; }
+.msg.is-error { color: var(--danger); }
+
+/* ---------- Notes ---------- */
+.notes {
+  list-style: none; margin: 24px 0 0; padding: 0 4px;
+  display: grid; gap: 8px; color: var(--dim); font-size: .8125rem;
+}
+.notes li { display: flex; gap: 10px; align-items: flex-start; }
+.notes li::before {
+  content: ""; flex: none; width: 5px; height: 5px; margin-top: .6em;
+  border-radius: 50%; background: #4a4a4a;
+}
+
+/* ---------- Footer ---------- */
+.footer { display: flex; flex-direction: column; align-items: center; gap: 10px; padding: 8px 0; text-align: center; }
+.gh-btn {
+  display: inline-flex; align-items: center; gap: 10px;
+  min-height: 44px; padding: 10px 22px;
+  border: 1px solid var(--border-strong); border-radius: 999px;
+  background: var(--surface); color: var(--text);
+  font-size: .9375rem; font-weight: 500; text-decoration: none;
+  transition: background-color .2s, border-color .2s;
+}
+.gh-icon { flex: none; }
+.footer-note { margin: 0; max-width: 38ch; color: var(--dim); font-size: .75rem; }
+.noscript { color: var(--danger); text-align: center; }
+
+/* hover เฉพาะอุปกรณ์ที่มีเมาส์ กันปุ่มค้างสีบนจอสัมผัส */
+@media (hover: hover) {
+  .lang-btn:hover:not([aria-pressed="true"]) { color: var(--text); }
+  .btn-primary:hover:not(:disabled) { background: #d4d4d4; border-color: #d4d4d4; }
+  .btn-ghost:hover { background: var(--surface-hover); border-color: #555; }
+  .gh-btn:hover { background: var(--surface-hover); border-color: #5a5a5a; }
+}
+
+/* มือถือแนวนอน / จอเตี้ย */
+@media (max-height: 560px) and (orientation: landscape) {
+  .header { margin-top: 8px; }
+  .title { font-size: clamp(1.5rem, 5vw, 2.25rem); }
+  .main { padding: 16px 0; }
+  .notes { display: none; }
+}
+
+/* จอใหญ่ */
+@media (min-width: 1440px) { .main { max-width: 480px; } }
+
+/* ผู้ใช้ที่ตั้งค่าลดการเคลื่อนไหว */
+@media (prefers-reduced-motion: reduce) {
+  .btn, .gh-btn, .lang-btn { transition: none; }
+  .code.reveal { animation: none; }
+  .spinner { animation-duration: 1.6s; }
+}
