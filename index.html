@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy"
+        content="default-src 'none'; script-src 'self'; style-src 'self';
+                 connect-src https://script.google.com https://script.googleusercontent.com;
+                 img-src 'self'; base-uri 'none'; form-action 'none'">
+  <meta name="referrer" content="no-referrer">
+  <title>สุ่มรหัส 4 หลัก</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <main class="card">
+    <h1>สุ่มรหัส 4 หลัก</h1>
+    <div id="code" aria-live="polite">----</div>
+    <button id="genBtn" type="button">สุ่มรหัส</button>
+    <button id="copyBtn" type="button" hidden>คัดลอก</button>
+    <p id="msg">รหัสไม่ซ้ำกับใคร และระบบไม่เก็บข้อมูลว่าใครได้รหัสอะไร</p>
+  </main>
+</body>
+</html>
